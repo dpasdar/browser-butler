@@ -43,7 +43,7 @@ async def lifespan(app: FastAPI):
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
     app = FastAPI(
-        title="Browser Automation API",
+        title="Browser Butler API",
         description="AI-powered browser automation with scheduling and notifications",
         version="0.1.0",
         lifespan=lifespan,

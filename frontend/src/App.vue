@@ -33,7 +33,7 @@ function connectSSE() {
   <div class="app">
     <nav class="navbar">
       <div class="navbar-brand">
-        <RouterLink to="/">Browser Automation</RouterLink>
+        <RouterLink to="/">Browser Butler</RouterLink>
       </div>
       <div class="navbar-menu">
         <RouterLink to="/" class="nav-link">Dashboard</RouterLink>

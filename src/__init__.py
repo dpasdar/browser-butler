@@ -1,1 +1,1 @@
-"""Browser Automation Application."""
+"""Browser Butler Application."""
