@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { Task } from '../types'
 import StatusBadge from './StatusBadge.vue'
 

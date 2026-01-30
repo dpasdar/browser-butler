@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import type { Task, TaskCreate } from '../types'
 import { getTask, createTask, updateTask } from '../api'
 import CronInput from '../components/CronInput.vue'
 
@@ -17,7 +16,7 @@ const error = ref<string | null>(null)
 
 const useSchedule = ref(false)
 
-const form = ref<TaskCreate>({
+const form = ref({
   name: '',
   description: '',
   cron_expression: '0 * * * *',
