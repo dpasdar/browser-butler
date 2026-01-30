@@ -95,8 +95,12 @@ setup_node
 if ! command -v uv >/dev/null 2>&1; then
     echo "Installing uv..."
     curl -LsSf https://astral.sh/uv/install.sh | sh
-    export PATH="$HOME/.cargo/bin:$PATH"
+    export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 fi
+
+# Get the actual path to uv
+UV_PATH="$(command -v uv)"
+echo "Using uv at: $UV_PATH"
 
 cd "$PROJECT_DIR"
 
@@ -133,6 +137,7 @@ if [ "$HAS_SYSTEMD" = true ]; then
     echo "=== Creating systemd service ==="
 
     SERVICE_FILE="/tmp/${SERVICE_NAME}.service"
+    UV_DIR="$(dirname "$UV_PATH")"
     cat > "$SERVICE_FILE" << EOF
 [Unit]
 Description=Browser Butler Service
@@ -142,9 +147,9 @@ After=network.target
 Type=simple
 User=$USER
 WorkingDirectory=$PROJECT_DIR
-Environment="PATH=$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="PATH=$UV_DIR:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/bin:/bin"
 Environment="PYTHONPATH="
-ExecStart=$HOME/.cargo/bin/uv run uvicorn src.main:app --host 0.0.0.0 --port 8000
+ExecStart=$UV_PATH run uvicorn src.main:app --host 0.0.0.0 --port 8000
 Restart=always
 RestartSec=10
 
